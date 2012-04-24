@@ -1,4 +1,8 @@
+# Compiled
 *.class
+
+# Temporary files
+*~
 
 # Package Files #
 *.jar
