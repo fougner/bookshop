@@ -14,25 +14,27 @@
   <xsl:output method="html"/>
 
   <xsl:template match="shoppingcart">
-  <br /> <br />
-  <table border="0" cellspacing="0">
-    <tr bgcolor="silver">
-    <td colspan="4">
-        <strong>Shoppingcart</strong>
-    </td>
-    <tr bgcolor="silver">
+  
+  <div class="row">
+    <div class="span8">
+  <table class="table table-striped">
+    <h2>Shoppingcart</h2>
+    <thead>
       <td>Title</td>
+      <td></td>
       <td>Quantity</td>
-      <td colspan="2">Remove</td>
-    </tr>
-    </tr>
+      <td></td>
+    </thead>
         <xsl:apply-templates/>
-      <tr>
-      <td colspan="2">
-        <a href="shop?action=checkout">Checkout</a>
-      </td>
+      
+  <tfoot>
+    <tr>
+      <td><a href="shop?action=checkout" class="btn btn-primary btn-large">Checkout</a></td>
     </tr>
+  </tfoot>
    </table>
+   </div>
+  </div>
   </xsl:template>
   <xsl:template match="order">
   <form method="post" action="shop">
@@ -40,7 +42,7 @@
         <td>
             <xsl:value-of select="book/title"/>
         </td>
-        <td align="right">
+        <td>
             <xsl:value-of select="quantity"/>
         </td>
 
@@ -53,7 +55,7 @@
             </xsl:element>        
         </td>
         <td>
-            <input type="submit" value="Remove"/>
+            <input type="submit" class="btn btn-primary" value="Remove"/>
         </td>
     
       <xsl:element name="input"> <!--A ordinary input in XSLT-->

@@ -14,8 +14,8 @@
   <xsl:output method="html"/>
 
   <xsl:template match="booklist">
-  <table border="0">
-    <tr bgcolor="silver" cellspacing="0">
+  <table class="table table-striped">
+    <thead>
     <td>
         <strong>Book</strong>
     </td>
@@ -25,14 +25,16 @@
     <td>
         <strong>Price</strong>
     </td>
-    </tr>
+    </thead>
+    <tbody>
         <xsl:apply-templates/>
+    </tbody>
    </table>
   </xsl:template>
   
   <xsl:template match="book">
     <form method="post" action="shop">
-    <tr bgcolor="#FFDC75" >
+    <tr>
         <td>
             <xsl:value-of select="title"/>
         </td>

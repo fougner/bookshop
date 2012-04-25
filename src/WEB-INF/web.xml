@@ -14,7 +14,7 @@
     </init-param>
     <init-param>
       <param-name>JDBC_URL</param-name>
-      <param-value>jdbc:mysql://localhost/olle?user=olle&amp;password=XX</param-value>
+      <param-value>jdbc:mysql://localhost/bookshop?user=bookshop&amp;password=bookshop</param-value>
       <description>The Database URL to use</description>
     </init-param>
     <init-param>

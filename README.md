@@ -1,5 +1,5 @@
 
-bookshop
+Bookshop
 ========
 
 Billy the bookshop 
