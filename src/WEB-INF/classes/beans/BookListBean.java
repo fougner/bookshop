@@ -9,7 +9,7 @@ import java.sql.*;
 import java.io.*;
 /**
  *
- * @author  Fredrik Ålund, Olle Eriksson
+ * @author
  */
 public class BookListBean {
     

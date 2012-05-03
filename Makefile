@@ -1,2 +1,4 @@
+CLASSPATH=/usr/share/tomcat7/lib/servlet-api.jar:./src/WEB-INF/classes
+
 all:
-	javac -cp src src/WEB-INF/classes/servlets/TestServlet.java
+	javac -cp ${CLASSPATH} src/WEB-INF/classes/servlets/*.java

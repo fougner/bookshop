@@ -17,7 +17,7 @@
   
   <div class="row">
     <div class="span8">
-  <table class="table table-striped">
+  <table class="table">
     <h2>Shoppingcart</h2>
     <thead>
       <td>Title</td>
@@ -48,7 +48,7 @@
 
         <td>
             <xsl:element name="input"> <!--A ordinary input in XSLT-->
-              <xsl:attribute name="size">2</xsl:attribute>
+              
               <xsl:attribute name="type">text</xsl:attribute>
               <xsl:attribute name="value">1</xsl:attribute>
               <xsl:attribute name="name">quantity</xsl:attribute>

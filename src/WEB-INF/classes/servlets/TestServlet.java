@@ -23,7 +23,7 @@ public class TestServlet extends HttpServlet {
     /** Initializes the servlet.
      */
     public void init(ServletConfig config) throws ServletException {
-        Super.init(config);
+        super.init(config);
 
      }
     

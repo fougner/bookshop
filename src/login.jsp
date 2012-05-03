@@ -1,31 +1,25 @@
-<html>
-<head>
-<title>Login Page for the Bookshop</title>
-<body bgcolor="white">
-<form method="POST" action='<%= response.encodeURL("j_security_check") %>' >
-  <table border="0" cellspacing="5" align="center">
-    <tr>
-      <td colspan="2" bgcolor="#FFDC75"><h2>Log in to the Bookshop</td>
-    </tr>
-    <tr><td colspan="2"></td></tr>
-    <tr>
-      <th align="right">Username:</th>
-      <td align="left"><input type="text" name="j_username"></td>
-    </tr>
-    <tr>
-      <th align="right">Password:</th>
-      <td align="left"><input type="password" name="j_password"></td>
-    </tr>
-    <tr>
-      <td align="right"><input type="submit" value="Log In"></td>
-      <td align="left"><input type="reset"></td>
-    </tr>
-    <tr>
-     <td><a href="shop?action=newuser">I ain't got no account</a>      
-     </td>
-    </tr>
-  </table>
+<%@include file='header.html'%>
 
+<div class="container">
+ <div class="row">
+
+<form method="POST" class="well span4" action='<%= response.encodeURL("j_security_check") %>' >
+  <h2>Log in to the Bookshop</h2>
+  
+      <label>Username:</label>
+      <input type="text" name="j_username">
+    
+      <label>Password:</label>
+      <input type="password" name="j_password">
+    
+      <br />
+       <button type="submit" class="btn btn-primary">Log in</button>
+       <button type="reset" class="btn">Reset</button>
+      
+    
+      <a class="btn" href="shop?action=newuser">I ain't got no account</a>
 </form>
-</body>
-</html>
+
+</div> 
+</div> <!-- /container -->
+<%@include file='footer.html'%>

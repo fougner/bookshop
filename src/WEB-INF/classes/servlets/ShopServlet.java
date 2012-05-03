@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 import beans.*;
 /**
  *
- * @author  Fredrik Ålund, Olle Eriksson
+ * @author
  * @version 1.0
  */
 public class ShopServlet extends HttpServlet {
