@@ -9,7 +9,7 @@ package beans;
 import java.util.*;
 /**
  *
- * @author  Fredrik Ålund, Olle Eriksson
+ * @author Olle Eriksson
  */
 public class ShoppingBean {
     private Collection cart;
