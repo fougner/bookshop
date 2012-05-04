@@ -6,7 +6,7 @@ package beans;
 
 /**
  *
- * @author Olle Eriksson
+ * @author Alexander Fougner
  */
 public class BookBean {
 
@@ -15,9 +15,6 @@ public class BookBean {
     private int id;
     private String title;
     private int price;
-    private String authorName;
-    private String authorSurname;
-    private int pages;
     private String description;
     
     
@@ -41,22 +38,6 @@ public class BookBean {
         title=_title;
     }
 
-    public String getAuthorName() {
-        return authorName;
-    }
-    
-    public void setAuthorName(String _authorName) {
-        authorName=_authorName;
-    }
-
-    public String getAuthorSurname() {
-        return authorSurname;
-    }
-    
-    public void setAuthorSurname(String _authorSurname) {
-        authorSurname=_authorSurname;
-    }
-    
     public int getId() {
         return id;
     }
@@ -64,13 +45,6 @@ public class BookBean {
     public void setId( int _id) {
         id= _id;
         
-    }
-    public int getPages() {
-        return pages;
-    }
-    
-    public void setPages( int _pages) {
-        pages = _pages;
     }
 
     public void setDescription(String _description) {
@@ -97,18 +71,9 @@ public class BookBean {
       xmlOut.append("<title><![CDATA[");
       xmlOut.append(title);
       xmlOut.append("]]></title>");
-      xmlOut.append("<authorname><![CDATA[");
-      xmlOut.append(authorName);
-      xmlOut.append("]]></authorname>");
-      xmlOut.append("<authorsurname><![CDATA[");
-      xmlOut.append(authorSurname);
-      xmlOut.append("]]></authorsurname>");
       xmlOut.append("<price>");
       xmlOut.append(price);      
       xmlOut.append("</price>");
-      xmlOut.append("<pages>");
-      xmlOut.append(pages);
-      xmlOut.append("</pages>");
       xmlOut.append("<description><![CDATA[");
       xmlOut.append(description);      
       xmlOut.append("]]></description>");   
