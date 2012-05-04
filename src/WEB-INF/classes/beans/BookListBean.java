@@ -43,7 +43,7 @@ public class BookListBean {
 	    // each book is a BookBean object
 
             stmt = conn.createStatement();
-            String sql="SELECT PRODUCT_ID, TITLE, PRICE, PAGES, DESCRIPTION FROM PRODUCTS,";
+            String sql = "SELECT PRODUCT_ID, TITLE, PRICE, DESCRIPTION FROM PRODUCTS";
             rs= stmt.executeQuery(sql);
             
 	    // analyze the result set
