@@ -17,13 +17,13 @@
   <table border="0">
     <tr bgcolor="silver" cellspacing="0">
     <td>
-        <strong>Book</strong>
-    </td>
-    <td>
-        <strong>Author</strong>
+        <strong>Product</strong>
     </td>
     <td>
         <strong>Price</strong>
+    </td>
+    <td>
+        <strong>Stock</strong>
     </td>
     </tr>
         <xsl:apply-templates/>
@@ -38,6 +38,9 @@
         </td>
         <td>
             <xsl:value-of select="price"/>
+        </td>
+        <td>
+            <xsl:value-of select="qty"/>
         </td>
         <td>
             <xsl:element name="input"> <!--A ordinary input in XSLT-->

@@ -10,6 +10,7 @@ public class ProductBean {
     private String title;
     private int price;
     private String description;
+    private int qty;
     
     public ProductBean() {
     }
@@ -36,7 +37,6 @@ public class ProductBean {
     
     public void setId( int _id) {
         id= _id;
-        
     }
 
     public void setDescription(String _description) {
@@ -45,6 +45,14 @@ public class ProductBean {
 
     public String getDescription() {
         return description;
+    }
+
+    public int getQuantity() {
+      return qty;
+    }
+
+    public void setQuantity(int _qty) {
+      qty = _qty;
     }
 
     public String getXml() {
@@ -66,7 +74,10 @@ public class ProductBean {
       xmlOut.append("</price>");
       xmlOut.append("<description><![CDATA[");
       xmlOut.append(description);      
-      xmlOut.append("]]></description>");   
+      xmlOut.append("]]></description>");
+      xmlOut.append("<qty><![CDATA[");
+      xmlOut.append(qty);      
+      xmlOut.append("]]></qty>");
       xmlOut.append("</product>");
       
       return xmlOut.toString();

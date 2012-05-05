@@ -28,7 +28,12 @@ public class ProductListBean {
 
             stmt = conn.createStatement();
 
-            String sql="SELECT * FROM PRODUCTS";
+            String sql= "SELECT p1.* , MIN( p3.QTY ) AS QTY FROM PRODUCTS AS p1";
+            sql += " INNER JOIN PRODUCTS_COMPONENTS AS p2 ON p1.product_id = p2.product_id";
+            sql += " INNER JOIN COMPONENTS AS p3 ON p2.component_id = p3.component_id";
+            sql += " GROUP BY p1.PRODUCT_ID";
+
+            //String sql="SELECT * FROM PRODUCTS";
             rs= stmt.executeQuery(sql);
             
             while(rs.next()){
@@ -39,6 +44,7 @@ public class ProductListBean {
                 pb.setTitle(rs.getString("TITLE"));
                 pb.setPrice(rs.getInt("PRICE"));
                 pb.setDescription(rs.getString("DESCRIPTION"));
+                pb.setQuantity(rs.getInt("QTY"));
                 productList.add(pb);
                 
             }
