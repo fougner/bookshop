@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 import beans.*;
 /**
  *
- * @author  Fredrik Ålund, Olle Eriksson
+ * @author Olle Eriksson, Alexander Fougner
  * @version 1.0
  */
 public class ShopServlet extends HttpServlet {
@@ -22,7 +22,7 @@ public class ShopServlet extends HttpServlet {
     private static String jdbcURL = null;
     private static String detailPage=null;
     private static String redirectPage = null;
-    private BookListBean bookList = null;
+    private ProductListBean productList = null;
     /** Initializes the servlet.
      */
     public void init(ServletConfig config) throws ServletException {
@@ -44,7 +44,7 @@ public class ShopServlet extends HttpServlet {
 	// get the books from the database using a bean
 
         try{
-            bookList = new BookListBean(jdbcURL);
+            productList = new ProductListBean(jdbcURL);
         }
         catch(Exception e){
             throw new ServletException(e);
@@ -54,7 +54,7 @@ public class ShopServlet extends HttpServlet {
 	// store the booklist in application scope
 
          ServletContext sc = getServletContext();
-         sc.setAttribute("bookList",bookList);
+         sc.setAttribute("bookList",productList);
      }
     
     /** Destroys the servlet.
@@ -105,11 +105,11 @@ public class ShopServlet extends HttpServlet {
 
             if (request.getParameter("bookid") != null && 
                 request.getParameter("quantity")!=null ){
-                BookBean bb = null;
+                ProductBean bb = null;
 		
 		// search the book in our shop
 
-		bb = bookList.getById(Integer.parseInt(
+		bb = productList.getById(Integer.parseInt(
                                          request.getParameter("bookid")));
                 if(bb==null){
                     throw new ServletException("The book is not in stock.");
@@ -119,7 +119,7 @@ public class ShopServlet extends HttpServlet {
 
 		    // found, add it to the cart
 
-                    shoppingCart.addBook(bb,Integer.parseInt(
+                    shoppingCart.addProduct(bb,Integer.parseInt(
                                          request.getParameter("quantity")));
                 }
             }
@@ -135,7 +135,7 @@ public class ShopServlet extends HttpServlet {
 	else if(request.getParameter("action").equals("remove")){
 	    if (request.getParameter("bookid") != null && 
 		request.getParameter("quantity")!=null ){
-		shoppingCart.removeBook(
+		shoppingCart.removeProduct(
 			Integer.parseInt(request.getParameter("bookid")),
                         Integer.parseInt(request.getParameter("quantity")));
            }
@@ -154,7 +154,7 @@ public class ShopServlet extends HttpServlet {
 
 		// find the book, store a reference in our request
 
-		BookBean bb = bookList.getById(
+		ProductBean bb = productList.getById(
 			   Integer.parseInt(request.getParameter("bookid")));
 		request.setAttribute("book", bb);
 	    }

@@ -13,7 +13,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="html"/>
 
-  <xsl:template match="booklist">
+  <xsl:template match="productlist">
   <table border="0">
     <tr bgcolor="silver" cellspacing="0">
     <td>
@@ -30,14 +30,11 @@
    </table>
   </xsl:template>
   
-  <xsl:template match="book">
+  <xsl:template match="product">
     <form method="post" action="shop">
     <tr bgcolor="#FFDC75" >
         <td>
             <xsl:value-of select="title"/>
-        </td>
-        <td>
-            <xsl:value-of select="authorsurname"/>, <xsl:value-of select="authorname"/> 
         </td>
         <td>
             <xsl:value-of select="price"/>

@@ -5,7 +5,7 @@
 <%@taglib prefix="bookshop" uri="/bookshop"%>
 
 
-<jsp:useBean id="book" class="beans.BookBean" scope="request">
+<jsp:useBean id="book" class="beans.ProductBean" scope="request">
     Error, the bean should have been created in the servlet!
 </jsp:useBean>
 

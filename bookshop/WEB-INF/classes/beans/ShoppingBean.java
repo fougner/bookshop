@@ -9,23 +9,19 @@ package beans;
 import java.util.*;
 /**
  *
- * @author  Fredrik Ålund, Olle Eriksson
+ * @author Olle Eriksson
  */
 public class ShoppingBean {
     private Collection cart;
     
-    /** Creates a new instance of ShoppingBean */
-
     public ShoppingBean() {
         cart = new ArrayList();
     }
     
-    // add some copies of a book to the shopping cart
-
-    public void addBook(BookBean bb, int quantity) {
+    public void addProduct(ProductBean bb, int quantity) {
         
         Object newItem[] = null;
-        BookBean tmpBean = null;
+        ProductBean tmpBean = null;
 
 	// if the cart is empty just add the book
 
@@ -48,7 +44,7 @@ public class ShoppingBean {
 
 		// check if we found the book
 
-		if(((BookBean)tmpArr[0]).getId()==bb.getId()){ 
+		if(((ProductBean)tmpArr[0]).getId()==bb.getId()){ 
 
 		    // yes, increase the quantity
 
@@ -74,7 +70,7 @@ public class ShoppingBean {
 
     // remove some copies of a book from the cart
 
-    public void removeBook(int id, int quantity) {
+    public void removeProduct(int id, int quantity) {
 
 	// if must not be empty
 
@@ -86,7 +82,7 @@ public class ShoppingBean {
 
             while(iter.hasNext()){
                 tmpArr=(Object[])iter.next();
-                if(((BookBean)tmpArr[0]).getId()==id){
+                if(((ProductBean)tmpArr[0]).getId()==id){
 
 		    // found
 
@@ -127,7 +123,7 @@ public class ShoppingBean {
         while(iter.hasNext()){
             objBuff =(Object[])iter.next();
             buff.append("<order>");
-            buff.append(((BookBean)objBuff[0]).getXml());
+            buff.append(((ProductBean)objBuff[0]).getXml());
             buff.append("<quantity>");
             buff.append(((Integer)objBuff[1]).intValue());
             buff.append("</quantity>");
