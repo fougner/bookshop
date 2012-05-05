@@ -38,7 +38,7 @@
   <form method="post" action="shop">
     <tr>
         <td>
-            <xsl:value-of select="book/title"/>
+            <xsl:value-of select="product/title"/>
         </td>
         <td align="right">
             <xsl:value-of select="quantity"/>

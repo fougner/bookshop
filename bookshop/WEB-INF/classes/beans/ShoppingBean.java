@@ -1,11 +1,5 @@
 package beans;
 
-/*
- * ShoppingBean.java
- *
- * Created on den 12 december 2002, 09:49
- */
-
 import java.util.*;
 /**
  *
