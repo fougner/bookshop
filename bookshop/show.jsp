@@ -4,10 +4,10 @@
 <%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@taglib prefix="bookshop" uri="/bookshop"%>
 
-<html>
-<head><title>BookShop::Shop</title></head>
-<body>
-<h2>Billy Book Shop</h2>
+<%@include file='header.html'%>
+
+<div class="container">
+
 <jsp:useBean id="bookList" class="beans.ProductListBean" scope="application">
     Error, the bean should have been created in the servlet!
 </jsp:useBean>
@@ -39,5 +39,6 @@
     <input type="submit" value="Logout">
   </form>
 </c:if>
-</body>
-</html>
+
+</div> <!-- /container -->
+<%@include file='footer.html'%>

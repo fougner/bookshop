@@ -14,8 +14,8 @@
   <xsl:output method="html"/>
 
   <xsl:template match="productlist">
-  <table border="0">
-    <tr bgcolor="silver" cellspacing="0">
+  <table class="table">
+    <tr>
     <td>
         <strong>Product</strong>
     </td>
@@ -32,7 +32,7 @@
   
   <xsl:template match="product">
     <form method="post" action="shop">
-    <tr bgcolor="#FFDC75" >
+    <tr>
         <td>
             <xsl:value-of select="title"/>
         </td>

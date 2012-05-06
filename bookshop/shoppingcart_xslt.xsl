@@ -15,12 +15,12 @@
 
   <xsl:template match="shoppingcart">
   <br /> <br />
-  <table border="0" cellspacing="0">
-    <tr bgcolor="silver">
-    <td colspan="4">
+  <table class="table">
+    <tr>
+    <td>
         <strong>Shoppingcart</strong>
     </td>
-    <tr bgcolor="silver">
+    <tr>
       <td>Title</td>
       <td>Quantity</td>
       <td colspan="2">Remove</td>
