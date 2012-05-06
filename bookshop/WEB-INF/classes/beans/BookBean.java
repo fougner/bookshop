@@ -6,7 +6,7 @@ package beans;
 
 /**
  *
- * @author  Fredrik Ålund, Olle Eriksson
+ * @author Olle Eriksson
  */
 public class BookBean {
 
