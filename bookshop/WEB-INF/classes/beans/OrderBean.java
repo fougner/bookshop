@@ -104,16 +104,22 @@ public class OrderBean  {
       rs.next();
       int orderId=rs.getInt(1);
 
+      ProductListBean plb = new ProductListBean(url);
+      ProductBean tmp = null;
+
       Iterator iter = ((Collection)sb.getCart()).iterator();
       ProductBean bb = null;
 
       orderItemPstmt = con.prepareStatement(orderItemSQL);
       while(iter.hasNext()){  
         bb = (ProductBean)iter.next();
-          orderItemPstmt.setInt(1, orderId);
-          orderItemPstmt.setInt(2, bb.getId());
-          orderItemPstmt.setInt(3, bb.getQuantity());  
-          orderItemPstmt.execute();
+          tmp = plb.getById(bb.getId());
+          if(bb.getQuantity() > tmp.getQuantity())
+            throw new Exception("Not sufficient stock.");
+        orderItemPstmt.setInt(1, orderId);
+        orderItemPstmt.setInt(2, bb.getId());
+        orderItemPstmt.setInt(3, bb.getQuantity());  
+        orderItemPstmt.execute();
       }
   }
 }
