@@ -40,7 +40,7 @@
             <xsl:value-of select="price"/>
         </td>
         <td>
-            <xsl:value-of select="qty"/>
+            <xsl:value-of select="quantity"/>
         </td>
         <td>
             <xsl:element name="input"> <!--A ordinary input in XSLT-->

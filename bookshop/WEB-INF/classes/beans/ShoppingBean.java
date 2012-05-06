@@ -3,107 +3,52 @@ package beans;
 import java.util.*;
 /**
  *
- * @author Olle Eriksson
+ * @author Alexander Fougner
  */
 public class ShoppingBean {
-    private Collection cart;
+    private ArrayList<ProductBean> cart;
     
     public ShoppingBean() {
         cart = new ArrayList();
     }
     
+
+    /*
+    *   Add Product to cart
+    *
+    */
     public void addProduct(ProductBean bb, int quantity) {
-        
-        /*
-        *   A Cart item is represented as an array
-        *   [0] -> ProductBean
-        *   [1] -> Integer quantity
-        */
 
-        Object newItem[] = null;
-        ProductBean tmpBean = null;
-
-	// if the cart is empty just add the book
-
-        if (cart.isEmpty()){
-            newItem = new Object[2];
-            newItem[0]=bb;
-            newItem[1]=new Integer(quantity);    
-            cart.add(newItem);
+        ProductBean pb = find(bb.getId());
+        if(pb != null) {
+            pb.setQuantity(quantity+pb.getQuantity());
         }
-
-	// otherwise we need to check if this book already
-	// is in the cart
-
-        else{
-	    Iterator iter = cart.iterator();  // get an iterator
-	    Object tmpArr[];
-	    boolean found = false;
-	    while(iter.hasNext()){
-		tmpArr=(Object[])iter.next();
-
-		// check if we found the book
-
-		if(((ProductBean)tmpArr[0]).getId()==bb.getId()){ 
-
-		    // yes, increase the quantity
-
-		    Integer tmpAntal = (Integer)tmpArr[1];
-		    tmpArr[1]=new Integer(tmpAntal.intValue()+quantity); 
-		    found= true;
-		}
-		
-	    }
-	    
-	    // if we didn't find it, add it
-	    
-	    if(!found){
-		newItem = new Object[2];
-		newItem[0]=bb;
-		newItem[1]=new Integer(quantity);    
-		cart.add(newItem);
-		System.out.println("addProduct: cart.size():" + cart.size());
-	    }
-	    
+        else {
+            bb.setQuantity(quantity);
+            cart.add(bb);
+            System.out.println("addProduct: cart.size():" + cart.size());
         }          
-    }    
+    }
 
-    // remove some copies of a book from the cart
-
+    /*
+    *   Remove 
+    *   @param quantity 
+    *   products with ID 
+    *   @param id 
+    *   from cart
+    */
     public void removeProduct(int id, int quantity) {
+        ProductBean pb = find(id);
+        if(pb != null) {
+            if(quantity > pb.getQuantity())
+                quantity = pb.getQuantity();
+            pb.setQuantity(pb.getQuantity() - quantity);
 
-	// if must not be empty
-
-        if(!cart.isEmpty()){
-            Iterator iter = cart.iterator();
-            Object tmpArr[];
-
-	    // search for the book
-
-            while(iter.hasNext()){
-                tmpArr=(Object[])iter.next();
-                if(((ProductBean)tmpArr[0]).getId()==id){
-
-		    // found
-
-                    Integer tmpAntal = (Integer)tmpArr[1];
-
-		    // if all copies removed, remove the book
-		    // from the cart
-
-                    if(tmpAntal.intValue()<=quantity){
-                        iter.remove();
-                    }
-                    else{
-
-			// else reduce quantity
-
-                        tmpArr[1]=new Integer(tmpAntal.intValue()-quantity);
-                    }
-                }
+            if(pb.getQuantity() < 1) {
+                cart.remove(cart.indexOf(pb));
             }
         }
-    }     
+    }
     
 
     /*
@@ -112,9 +57,9 @@ public class ShoppingBean {
     *
     */
     public int getQuantity(int id) {
-        Object[] tmpArr = find(id);
-        if(tmpArr != null) {
-            return (Integer)tmpArr[1].intValue();
+        ProductBean tmp = find(id);
+        if(tmp != null) {
+            return tmp.getQuantity();
         } else {
             return 0;
         }
@@ -126,50 +71,43 @@ public class ShoppingBean {
     *   if it exists. Returns null otherwise.
     *
     */
-    public Object[] find(int id) {
+    public ProductBean find(int id) {
         Iterator iter = cart.iterator();  // get an iterator
-        Object tmpArr[];
+        ProductBean tmp = null;
         while(iter.hasNext()){
-            tmpArr=(Object[])iter.next();
-            if(((ProductBean)tmpArr[0]).getId()==id){ 
-                return tmpArr;
+            tmp=(ProductBean)iter.next();
+            if(tmp.getId()==id){ 
+                return tmp;
             }
         }
         return null;
     }
 
-    // clear the cart
-
     void clear() {
         cart.clear();
     }
-    
-    // create an XML document out of the shopping cart
 
     public String getXml(){
         StringBuffer buff = new StringBuffer();
         
         Iterator iter = cart.iterator();
-        Object objBuff[] = null;
+        ProductBean pb = null;
         buff.append("<shoppingcart>");
         
         while(iter.hasNext()){
-            objBuff =(Object[])iter.next();
+            pb =(ProductBean)iter.next();
             buff.append("<order>");
-            buff.append(((ProductBean)objBuff[0]).getXml());
-            buff.append("<quantity>");
+            buff.append(pb.getXml());
+            /*buff.append("<quantity>");
             buff.append(((Integer)objBuff[1]).intValue());
-            buff.append("</quantity>");
+            buff.append("</quantity>");*/
             buff.append("</order>");            
         }
         buff.append("</shoppingcart>");
         return buff.toString();
     }
 
-    // get the cart
-
     public Collection getCart(){
       return cart;
     }
-    
 }

@@ -79,7 +79,7 @@
             <xsl:value-of select="product/title"/>
         </td>
         <td align="right">
-            <xsl:value-of select="quantity"/>
+            <xsl:value-of select="product/quantity"/>
         </td>
     </tr>
   </xsl:template>

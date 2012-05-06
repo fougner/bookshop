@@ -75,9 +75,9 @@ public class ProductBean {
       xmlOut.append("<description><![CDATA[");
       xmlOut.append(description);      
       xmlOut.append("]]></description>");
-      xmlOut.append("<qty><![CDATA[");
+      xmlOut.append("<quantity><![CDATA[");
       xmlOut.append(qty);      
-      xmlOut.append("]]></qty>");
+      xmlOut.append("]]></quantity>");
       xmlOut.append("</product>");
       
       return xmlOut.toString();

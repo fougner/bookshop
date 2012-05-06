@@ -113,18 +113,13 @@ public class OrderBean  {
 
       Iterator iter = ((Collection)sb.getCart()).iterator();
       ProductBean bb = null;
-      Object tmpArr[];
 
-      //Loop over the entire collection, i.e the entire shopping cart
- 
       orderItemPstmt = con.prepareStatement(orderItemSQL);
-      while(iter.hasNext()){
-          
-	  tmpArr = (Object[])iter.next();
-	  bb = (ProductBean)tmpArr[0];
-          orderItemPstmt.setInt(1,orderId);
-          orderItemPstmt.setInt(2,bb.getId());
-          orderItemPstmt.setInt(3,((Integer)tmpArr[1]).intValue());  
+      while(iter.hasNext()){  
+        bb = (ProductBean)iter.next();
+          orderItemPstmt.setInt(1, orderId);
+          orderItemPstmt.setInt(2, bb.getId());
+          orderItemPstmt.setInt(3, bb.getQuantity());  
           orderItemPstmt.execute();
       }
   }
