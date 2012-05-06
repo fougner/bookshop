@@ -1,7 +1,8 @@
-<html>
-<head>
-<title>Login Page for the Bookshop</title>
-<body bgcolor="white">
+
+<%@include file='header.html'%>
+
+<div class="container">
+
 <form method="POST" action='<%= response.encodeURL("j_security_check") %>' >
   <table border="0" cellspacing="5" align="center">
     <tr>
@@ -27,5 +28,6 @@
   </table>
 
 </form>
-</body>
-</html>
+
+</div> <!-- /container -->
+<%@include file='footer.html'%>

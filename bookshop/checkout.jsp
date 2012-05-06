@@ -4,6 +4,10 @@
 <%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@taglib prefix="bookshop" uri="/bookshop"%>
 
+ <%@include file='header.html'%>
+
+<div class="container">
+
 <c:if test="${sessionScope.currentUser == null}">
   <bookshop:profile url="${jdbcURL}"/>
 </c:if>
@@ -20,6 +24,6 @@
    </checkout>
 </x:transform>
 
-
-
+</div> <!-- /container -->
+<%@include file='footer.html'%>
 
