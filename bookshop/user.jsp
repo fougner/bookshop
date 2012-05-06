@@ -4,9 +4,10 @@
 <%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@taglib prefix="webstore" uri="/bookshop"%>
 
-<html>
-<head><title>BookShop::NEWUSER</title></head>
-<body>
+<%@include file='header.html'%>
+
+<div class="container">
+
 	<h1>Please create the profile for you. 
       </h1>
 	${(passwordInvalid != null)?(passwordInvalid):null}
@@ -68,6 +69,5 @@
 	<input type="submit" value="Go">
       </form>
 
-  
-</body>
-</html>
+  </div> <!-- /container -->
+<%@include file='footer.html'%>
