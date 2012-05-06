@@ -53,7 +53,7 @@
     
       <xsl:element name="input"> <!--A ordinary input in XSLT-->
         <xsl:attribute name="type">hidden</xsl:attribute>
-        <xsl:attribute name="value"><xsl:value-of select="book/id"/></xsl:attribute>
+        <xsl:attribute name="value"><xsl:value-of select="product/id"/></xsl:attribute>
         <xsl:attribute name="name">bookid</xsl:attribute>
       </xsl:element>
       <xsl:element name="input"> <!--A ordinary input in XSLT-->
