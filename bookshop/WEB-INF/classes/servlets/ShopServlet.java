@@ -114,7 +114,7 @@ public class ShopServlet extends HttpServlet {
                 if(bb==null){
                     throw new ServletException("The book is not in stock.");  
                 }
-                else if(bb.getQuantity()< shoppingCart.getQuantity(id) ) {
+                else if(bb.getQuantity()< shoppingCart.getQuantity(id)+qty ) {
 					throw new ServletException("Not enough items in stock.");
                 }
                 else {
