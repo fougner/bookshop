@@ -99,22 +99,6 @@ public class ShoppingBean {
         }
     }     
     
-    // returns the count of a specific product from the cart
-    public int getProductCount(int id) {
-        int count=0;
-        if(!cart.isEmpty()){
-            Iterator iter = cart.iterator();
-            Object tmpArr[];
-        // search for the book
-            while(iter.hasNext()){
-                tmpArr=(Object[])iter.next();
-                if(((ProductBean)tmpArr[0]).getId()==id){
-                    count=(Integer)tmpArr[1];
-                }
-            }
-        }
-        return count;
-    }
     // clear the cart
 
     void clear() {
