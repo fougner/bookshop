@@ -1,8 +1,5 @@
 package servlets;
-/*
- * Shop.java
- *
- */
+
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -23,13 +20,9 @@ public class ShopServlet extends HttpServlet {
     private static String detailPage=null;
     private static String redirectPage = null;
     private ProductListBean productList = null;
-    /** Initializes the servlet.
-     */
+
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-
-	// look up our aliases for all pages, these are mapped 
-	// in web.xml
 
         showPage = config.getInitParameter("SHOW_PAGE");
         checkoutPage = config.getInitParameter("CHECKOUT_PAGE");
@@ -41,8 +34,6 @@ public class ShopServlet extends HttpServlet {
         jdbcURL = config.getInitParameter("JDBC_URL");
         redirectPage = config.getInitParameter("CHECKOUT_REDIRECT_PAGE");
 
-	// get the books from the database using a bean
-
         try{
             productList = new ProductListBean(jdbcURL);
         }
@@ -50,15 +41,10 @@ public class ShopServlet extends HttpServlet {
             throw new ServletException(e);
         }
 
-        // servletContext is the same as scope Application
-	// store the booklist in application scope
-
          ServletContext sc = getServletContext();
          sc.setAttribute("bookList",productList);
      }
-    
-    /** Destroys the servlet.
-     */
+
     public void destroy() {
         
     }
@@ -72,44 +58,27 @@ public class ShopServlet extends HttpServlet {
                                   HttpServletResponse response)
     throws ServletException, java.io.IOException {
 
-	// this is the dispatcher in our application
-	// all requests will go through it.
-
-	// get access to the session and to the shoppingcart
-	// Store the logged in username in the session
-	// and get jdbc-URL provided in web.xml as init-parameter
-
         HttpSession sess = request.getSession();
         RequestDispatcher rd = null;
         ShoppingBean shoppingCart = getCart(request);
-	sess.setAttribute("currentUser", request.getRemoteUser());
+		sess.setAttribute("currentUser", request.getRemoteUser());
         sess.setAttribute("jdbcURL",jdbcURL);
 
-	// find out what to do based on the attribute "action"
-	// no action or show
-
-        if(request.getParameter("action") == null || 
+	if(request.getParameter("action") == null || 
            request.getParameter("action").equals("show")){
-	    
-            // A request dispatcher that's connected to the page.
 	    
             rd = request.getRequestDispatcher(showPage); 
             rd.forward(request,response);
-        }
-
-	// add a book to the shopping cart
-	
+	}
 	else if(request.getParameter("action").equals("add")){
             
-	    // verify bookid and quantity
-
             if (request.getParameter("bookid")!=null && 
                 request.getParameter("quantity")!=null){
             
                 ProductBean bb = null;
             	int id = Integer.parseInt(request.getParameter("bookid"));
             	int qty = Integer.parseInt(request.getParameter("quantity"));
-				// search the book in our shop
+				
 				bb = productList.getById(id);
                 if(bb==null){
                     throw new ServletException("The book is not in stock.");  
@@ -118,7 +87,6 @@ public class ShopServlet extends HttpServlet {
 					throw new ServletException("Not enough items in stock.");
                 }
                 else {
-		    		// found, add it to the cart
                     shoppingCart.addProduct(bb, qty);
                 }
             }

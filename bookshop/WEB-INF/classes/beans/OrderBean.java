@@ -4,8 +4,6 @@ import java.sql.*;
 import java.util.*;
 import java.io.*;
 
-// save an order in the database
-
 public class OrderBean  {
 
   private Connection con;
@@ -44,13 +42,10 @@ public class OrderBean  {
     orderSQL += " VALUES(?,?,?,?)";
     try{
 
-	// load the driver and get a connection
-
 	Class.forName("com.mysql.jdbc.Driver");
 	con = DriverManager.getConnection(url);
 
 	// turn off autocommit to handle transactions yourself
-
 	con.setAutoCommit(false);
 	orderPstmt = con.prepareStatement(orderSQL);
 	orderPstmt.setString(1, buyerName);
@@ -58,8 +53,6 @@ public class OrderBean  {
 	orderPstmt.setString(3, shippingZipcode);
 	orderPstmt.setString(4, shippingCity);
 	orderPstmt.execute();
-
-	// now handle all items in the cart
 
 	saveOrderItems();
 	sb.clear();

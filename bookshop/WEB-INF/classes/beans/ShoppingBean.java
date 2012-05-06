@@ -2,20 +2,18 @@ package beans;
 
 import java.util.*;
 /**
- *
  * @author Alexander Fougner
  */
 public class ShoppingBean {
+    
     private ArrayList<ProductBean> cart;
     
     public ShoppingBean() {
         cart = new ArrayList();
     }
-    
 
     /*
     *   Add Product to cart
-    *
     */
     public void addProduct(ProductBean bb, int quantity) {
 
@@ -51,7 +49,6 @@ public class ShoppingBean {
         }
     }
     
-
     /*
     *   Returns the cart quantity of Product with ID @param id
     *   Returns 0 if product is not found in cart.
@@ -64,7 +61,6 @@ public class ShoppingBean {
         } else {
             return 0;
         }
-
     }
 
     /*
@@ -90,11 +86,9 @@ public class ShoppingBean {
 
     public String getXml(){
         StringBuffer buff = new StringBuffer();
-        
         Iterator iter = cart.iterator();
         ProductBean pb = null;
-        buff.append("<shoppingcart>");
-        
+        buff.append("<shoppingcart>");  
         while(iter.hasNext()){
             pb =(ProductBean)iter.next();
             buff.append("<order>");
