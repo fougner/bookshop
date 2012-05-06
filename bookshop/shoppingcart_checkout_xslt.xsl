@@ -18,11 +18,11 @@
     <head><title>BookShop::Checkout</title></head>
     <body>
   <table border="0" cellspacing="0">
-    <tr bgcolor="silver">
+    <tr>
     <td colspan="4">
         <strong>Shoppingcart</strong>
     </td>
-    <tr bgcolor="silver">
+    <tr>
       <td>Title</td>
       <td>Quantity</td>
       <td colspan="2">Remove</td>
@@ -30,7 +30,7 @@
     </tr>
         <xsl:apply-templates select="shoppingcart/order"/>
    </table>
-    <table border="0">
+    <table>
       <form action="shop" method="post">
         <input type="hidden" name="action" value="save" />
         <tr>

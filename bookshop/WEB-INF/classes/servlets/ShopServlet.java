@@ -107,22 +107,20 @@ public class ShopServlet extends HttpServlet {
                 request.getParameter("quantity")!=null){
             
                 ProductBean bb = null;
+            	int id = Integer.parseInt(request.getParameter("bookid"));
+            	int qty = Integer.parseInt(request.getParameter("quantity"));
 				// search the book in our shop
-				bb = productList.getById(Integer.parseInt(
-                                         request.getParameter("bookid")));
+				bb = productList.getById(id);
                 if(bb==null){
                     throw new ServletException("The book is not in stock.");
                     
                 }
-                else if(bb.getQuantity()<(Integer.parseInt(request.getParameter("quantity")))) {
+                else if(bb.getQuantity()< shoppingCart.getQuantity(id) ) {
 					throw new ServletException("Not enough items in stock.");
                 }
                 else {
-
-		    // found, add it to the cart
-
-                    shoppingCart.addProduct(bb,Integer.parseInt(
-                                         request.getParameter("quantity")));
+		    		// found, add it to the cart
+                    shoppingCart.addProduct(bb, qty);
                 }
             }
             

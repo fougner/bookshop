@@ -14,6 +14,12 @@ public class ShoppingBean {
     
     public void addProduct(ProductBean bb, int quantity) {
         
+        /*
+        *   A Cart item is represented as an array
+        *   [0] -> ProductBean
+        *   [1] -> Integer quantity
+        */
+
         Object newItem[] = null;
         ProductBean tmpBean = null;
 
@@ -99,6 +105,39 @@ public class ShoppingBean {
         }
     }     
     
+
+    /*
+    *   Returns the cart quantity of Product with ID @param id
+    *   Returns 0 if product is not found in cart.
+    *
+    */
+    public int getQuantity(int id) {
+        Object[] tmpArr = find(id);
+        if(tmpArr) {
+            return tmpArr[1].intValue();
+        } else {
+            return 0;
+        }
+
+    }
+
+    /*
+    *   Returns the Cart object with ID @param id
+    *   if it exists. Returns null otherwise.
+    *
+    */
+    public Object[] find(int id) {
+        Iterator iter = cart.iterator();  // get an iterator
+        Object tmpArr[];
+        while(iter.hasNext()){
+            tmpArr=(Object[])iter.next();
+            if(((ProductBean)tmpArr[0]).getId()==id){ 
+                return tmpArr;
+            }
+        }
+        return null;
+    }
+
     // clear the cart
 
     void clear() {
