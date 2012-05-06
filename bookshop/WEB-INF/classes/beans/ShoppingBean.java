@@ -113,8 +113,8 @@ public class ShoppingBean {
     */
     public int getQuantity(int id) {
         Object[] tmpArr = find(id);
-        if(tmpArr) {
-            return tmpArr[1].intValue();
+        if(tmpArr != null) {
+            return (Integer)tmpArr[1].intValue();
         } else {
             return 0;
         }
