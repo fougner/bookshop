@@ -100,36 +100,25 @@ public class ShopServlet extends HttpServlet {
 	// add a book to the shopping cart
 	
 	else if(request.getParameter("action").equals("add")){
-            
 	    // verify bookid and quantity
-
-            if (request.getParameter("bookid")!=null && 
-                request.getParameter("quantity")!=null){
-            
+            if (request.getParameter("bookid")!=null && request.getParameter("quantity")!=null){            
                 ProductBean bb = null;
 				// search the book in our shop
-				bb = productList.getById(Integer.parseInt(
-                                         request.getParameter("bookid")));
+				bb = productList.getById(Integer.parseInt(request.getParameter("bookid")));
                 if(bb==null){
                     throw new ServletException("The book is not in stock.");
-                    
                 }
-                else if(bb.getQuantity()<(Integer.parseInt(request.getParameter("quantity")))) {
+                else if(bb.getQuantity()<((Integer.parseInt(request.getParameter("quantity")))+shoppingCart.getProductCount(bb.getId()))){
 					throw new ServletException("Not enough items in stock.");
                 }
-                else {
-
-		    // found, add it to the cart
-
-                    shoppingCart.addProduct(bb,Integer.parseInt(
-                                         request.getParameter("quantity")));
+                else{
+				    // found, add it to the cart
+                    shoppingCart.addProduct(bb,Integer.parseInt(request.getParameter("quantity")));
                 }
             }
-            
-	    // back to the showpage
-
-            rd = request.getRequestDispatcher(showPage);
-            rd.forward(request,response);
+        // back to the showpage
+        rd = request.getRequestDispatcher(showPage);
+        rd.forward(request,response);
        }
 
 	// remove a book from the cart
