@@ -24,8 +24,9 @@ public class ShoppingBean {
             pb.setQuantity(quantity+pb.getQuantity());
         }
         else {
-            bb.setQuantity(quantity);
-            cart.add(bb);
+            pb = bb.getCopy();
+            pb.setQuantity(quantity);
+            cart.add(pb);
             System.out.println("addProduct: cart.size():" + cart.size());
         }          
     }

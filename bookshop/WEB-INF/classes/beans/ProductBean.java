@@ -55,6 +55,16 @@ public class ProductBean {
       qty = _qty;
     }
 
+    public ProductBean getCopy() {
+      ProductBean pb = new ProductBean();
+      pb.id = this.id;
+      pb.title = this.title;
+      pb.price = this.price;
+      pb.description = this.description;
+      pb.qty = this.qty;
+      return pb;
+    }
+
     public String getXml() {
 
 	// use a Stringbuffer (not String) to avoid multiple
