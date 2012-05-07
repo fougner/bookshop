@@ -17,12 +17,25 @@ public class ProductListBean {
 
     public ProductListBean(String _url) throws Exception {
         url=_url;
+        productList = new ArrayList();
+
+        this.update();
+        
+    }
+
+    /*
+    *   Update the collection with latest information
+    *   from the database.
+    */
+    public void update() throws Exception{
+
         Connection conn =null;
         Statement stmt = null;
         ResultSet rs = null;
-        productList = new ArrayList();
-        try{
 
+        this.productList.clear();
+
+        try{
             Class.forName("com.mysql.jdbc.Driver");
             conn=DriverManager.getConnection(url);
 
@@ -33,7 +46,6 @@ public class ProductListBean {
             sql += " INNER JOIN COMPONENTS AS p3 ON p2.component_id = p3.component_id";
             sql += " GROUP BY p1.PRODUCT_ID";
 
-            //String sql="SELECT * FROM PRODUCTS";
             rs= stmt.executeQuery(sql);
             
             while(rs.next()){
@@ -53,16 +65,16 @@ public class ProductListBean {
         catch(SQLException sqle){
             throw new Exception(sqle);
         }
-	
+    
         finally{
- 	    try{
+        try{
               rs.close();
             }
             catch(Exception e) {}
             try{
               stmt.close();
             }
-	    catch(Exception e) {}
+        catch(Exception e) {}
             try {
               conn.close();
             }

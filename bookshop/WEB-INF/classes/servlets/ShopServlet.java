@@ -152,6 +152,7 @@ public class ShopServlet extends HttpServlet {
                               request.getParameter("shipping_city").trim());
 		try{
 		    ob.saveOrder();
+		    productList.update();
 		}
 		catch(Exception e){
 		    throw new ServletException("Error saving order", e);
