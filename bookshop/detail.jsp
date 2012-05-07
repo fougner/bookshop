@@ -4,6 +4,8 @@
 <%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@taglib prefix="bookshop" uri="/bookshop"%>
 
+<%@include file='header.html'%>
+
 
 <jsp:useBean id="book" class="beans.ProductBean" scope="request">
     Error, the bean should have been created in the servlet!
@@ -20,4 +22,4 @@
     </detailpage>
 </x:transform>
 
-
+<%@include file='footer.html'%>

@@ -9,8 +9,15 @@
     <div class="container">
     <div class="hero-unit">
         <h1>Welcome, admin!</h1>
-        <h1>Go to the <a href="admin/" class="btn btn-primary btn-large"><h1>Admin area</h1></a></h1>
-      </div>
+        <br>
+        <h2>Feel free to add products to the database</h2>
+    </div>
+
+    <jsp:useBean id="bookList" class="beans.ProductListBean" scope="application">
+    	Error, the bean should have been created in the servlet!
+	</jsp:useBean>
+
+</div>
 
     </div> <!-- /container -->
 <%@include file='footer.html'%>

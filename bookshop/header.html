@@ -27,6 +27,9 @@
               <li><a href="/bookshop/shop?action=profile">Profile</a></li>
               <li><a href="/bookshop/shop?action=logout">Logout</a></li>
               </c:if>
+              <c:if test="${sessionScope.currentUser=='admin'}">
+              <li><a href="/bookshop/admin">Admin</a></li>
+              </c:if>
 
             </ul>
           </div><!--/.nav-collapse -->
