@@ -65,6 +65,19 @@
     <url-pattern>/admin</url-pattern>
   </servlet-mapping>
 
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Admin</web-resource-name>
+      <url-pattern>/admin</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>admin</role-name>
+    </auth-constraint>
+    <user-data-constraint>
+      <transport-guarantee>NONE</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+
   <session-config>
     <session-timeout>
             30
@@ -76,7 +89,6 @@
       <web-resource-name>TheShop</web-resource-name>
 
       <url-pattern>/checkout.jsp</url-pattern>
-      <url-pattern>/admin</url-pattern>
     </web-resource-collection>
     <auth-constraint>
       <role-name>tomcat</role-name>

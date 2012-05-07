@@ -4,13 +4,28 @@
 <%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@taglib prefix="bookshop" uri="/bookshop"%>
 
- <%@include file='header.html'%>
+<%@include file='header.html'%>
 
-    <div class="container">
-    <div class="hero-unit">
-        <h1>Welcome, admin!</h1>
-        <h1>Go to the <a href="admin/" class="btn btn-primary btn-large"><h1>Admin area</h1></a></h1>
-      </div>
+<div class="container">
+	<div class="row">
 
-    </div> <!-- /container -->
+    	<h1>Components</h1>
+
+	<jsp:useBean id="componentList" class="beans.ComponentListBean" scope="application">
+    	Error, the bean should have been created in the servlet!
+	</jsp:useBean>
+
+
+<c:set var="componentlist_xslt">
+   <c:import url="componentlist_xslt.xsl"/>
+</c:set> 
+
+<x:transform xslt="${componentlist_xslt}">
+    <jsp:getProperty name="componentList" property="xml"/>
+</x:transform>
+
+
+	</div>
+
+</div> <!-- /container -->
 <%@include file='footer.html'%>

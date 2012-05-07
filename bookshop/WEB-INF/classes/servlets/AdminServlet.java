@@ -12,6 +12,7 @@ import beans.*;
 public class AdminServlet extends HttpServlet {
 
     private ProductListBean productList = null;
+    private ComponentListBean componentList;
     private String jdbcURL;
 
     public void init(ServletConfig config) throws ServletException {
@@ -20,14 +21,15 @@ public class AdminServlet extends HttpServlet {
         jdbcURL = config.getInitParameter("JDBC_URL");
 
         try{
-            productList = new ProductListBean(jdbcURL);
+            //productList = new ProductListBean(jdbcURL);
+            componentList = new ComponentListBean(jdbcURL);
         }
         catch(Exception e){
             throw new ServletException(e);
         }
 
 		ServletContext sc = getServletContext();
-		sc.setAttribute("bookList",productList);
+		sc.setAttribute("componentList",componentList);
      }
 
     public void destroy() {
@@ -43,12 +45,16 @@ public class AdminServlet extends HttpServlet {
 		sess.setAttribute("currentUser", request.getRemoteUser());
         sess.setAttribute("jdbcURL",jdbcURL);
 
-	if(request.getParameter("action") == null || 
-           request.getParameter("action").equals("show")){
-	    
+        try {
+	//if(request.getParameter("action") == null || 
+    //       request.getParameter("action").equals("show")){
+            componentList.update();
             rd = request.getRequestDispatcher("/admin.jsp");
             rd.forward(request,response);
-	}
+        } catch(Exception e){
+            throw new ServletException("Error", e);
+        }
+	//}
     }
 
 
