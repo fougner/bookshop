@@ -50,6 +50,21 @@
     <servlet-name>Shop</servlet-name>
     <url-pattern>/shop</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Admin</servlet-name>
+    <servlet-class>servlets.AdminServlet</servlet-class>
+    <init-param>
+      <param-name>JDBC_URL</param-name>
+      <param-value>jdbc:mysql://localhost/bookshop?user=bookshop&amp;password=bookshop&amp;verifyServerCertificate=false&amp;useSSL=true</param-value>
+      <description>The Database URL to use</description>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Admin</servlet-name>
+    <url-pattern>/admin</url-pattern>
+  </servlet-mapping>
+
   <session-config>
     <session-timeout>
             30
@@ -61,6 +76,7 @@
       <web-resource-name>TheShop</web-resource-name>
 
       <url-pattern>/checkout.jsp</url-pattern>
+      <url-pattern>/admin</url-pattern>
     </web-resource-collection>
     <auth-constraint>
       <role-name>tomcat</role-name>
