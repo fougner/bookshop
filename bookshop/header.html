@@ -23,6 +23,11 @@
               <li><a href="/bookshop">Home</a></li>
               <li><a href="/bookshop/shop">Shop</a></li>
               <li><a href="/bookshop/shop?action=checkout">Checkout</a></li>
+              <c:if test="${sessionScope.currentUser != null}">
+              <li><a href="/bookshop/shop?action=profile">Profile</a></li>
+              <li><a href="/bookshop/shop?action=logout">Logout</a></li>
+              </c:if>
+
             </ul>
           </div><!--/.nav-collapse -->
         </div>

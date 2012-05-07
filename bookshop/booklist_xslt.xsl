@@ -14,7 +14,7 @@
   <xsl:output method="html"/>
 
   <xsl:template match="productlist">
-  <table class="table">
+  <table class="table span6">
     <tr>
     <td>
         <strong>Product</strong>

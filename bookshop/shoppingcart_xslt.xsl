@@ -15,7 +15,7 @@
 
   <xsl:template match="shoppingcart">
   <br /> <br />
-  <table class="table">
+  <table class="table span6">
     <tr>
     <td>
         <strong>Shoppingcart</strong>

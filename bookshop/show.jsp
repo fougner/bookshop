@@ -17,20 +17,27 @@
    <c:import url="booklist_xslt.xsl"/>
 </c:set> 
 
+<div class="row">
+
 <x:transform xslt="${booklist_xslt}">
     <jsp:getProperty name="bookList" property="xml"/>
 </x:transform>
 
+</div>
 
 
 <c:set var="shoppingcart_xslt">
    <c:import url="shoppingcart_xslt.xsl"/>
 </c:set> 
+
+<div class="row">
 <x:transform xslt="${shoppingcart_xslt}">
    <bookshop:shoppingcart/>
 </x:transform>
+</div>
 
 <c:if test="${sessionScope.currentUser != null}">
+<div class="row">
   <form action=shop?action=profile method=post>
     <input type="submit" value="Update Profile">
   </form>
@@ -38,6 +45,8 @@
   <form action=shop?action=logout method=post>
     <input type="submit" value="Logout">
   </form>
+</div>
+
 </c:if>
 
 </div> <!-- /container -->
