@@ -9,6 +9,7 @@ public class OrderBean  {
   private Connection con;
   private PreparedStatement orderPstmt;
   private PreparedStatement orderItemPstmt;
+  private PreparedStatement deleteItemPstmt;
   private PreparedStatement stmt = null;
   private ResultSet rs=null;
 
@@ -22,9 +23,7 @@ public class OrderBean  {
     private static String orderSQL;
     private static String orderItemSQL;
 
-  public OrderBean(String _url, ShoppingBean _sb, String _buyerName, 
-		   String _shippingAddress, String _shippingZipcode, 
-		   String _shippingCity){
+  public OrderBean(String _url, ShoppingBean _sb, String _buyerName, String _shippingAddress, String _shippingZipcode, String _shippingCity){
     url = _url;
     sb = _sb;
     buyerName=_buyerName;
@@ -42,50 +41,50 @@ public class OrderBean  {
     orderSQL += " VALUES(?,?,?,?)";
     try{
 
-	Class.forName("com.mysql.jdbc.Driver");
-	con = DriverManager.getConnection(url);
+  	Class.forName("com.mysql.jdbc.Driver");
+  	con = DriverManager.getConnection(url);
 
-	// turn off autocommit to handle transactions yourself
-	con.setAutoCommit(false);
-	orderPstmt = con.prepareStatement(orderSQL);
-	orderPstmt.setString(1, buyerName);
-	orderPstmt.setString(2, shippingAddress);
-	orderPstmt.setString(3, shippingZipcode);
-	orderPstmt.setString(4, shippingCity);
-	orderPstmt.execute();
+  	// turn off autocommit to handle transactions yourself
+  	con.setAutoCommit(false);
+  	orderPstmt = con.prepareStatement(orderSQL);
+  	orderPstmt.setString(1, buyerName);
+  	orderPstmt.setString(2, shippingAddress);
+  	orderPstmt.setString(3, shippingZipcode);
+  	orderPstmt.setString(4, shippingCity);
+  	orderPstmt.execute();
 
-	saveOrderItems();
-	sb.clear();
-	con.commit();  // end the transaction
+  	saveOrderItems();
+  	sb.clear();
+  	con.commit();  // end the transaction
     }
     catch(Exception e){
-	try{
-	    con.rollback();    // failed, rollback the database
-	}
-	catch(Exception ee){}
-	throw new Exception("Error saving Order", e);
+  	try{
+  	    con.rollback();    // failed, rollback the database
+  	}
+  	catch(Exception ee){}
+  	throw new Exception("Error saving Order", e);
     }
     finally{
-	try {
-	    rs.close();
-	}
-	catch(Exception e) {}       
-	try {
-	    stmt.close();
-	}
-	catch(Exception e) {}
-	try{
-	    orderPstmt.close();
-	}
-	catch(Exception e){}
-	try{
-	    orderItemPstmt.close();
-	}
-	catch(Exception e){}
-	try{
-	    con.close();
-	}
-	catch(Exception e){}
+  	try {
+  	    rs.close();
+  	}
+  	catch(Exception e) {}       
+  	try {
+  	    stmt.close();
+  	}
+  	catch(Exception e) {}
+  	try{
+  	    orderPstmt.close();
+  	}
+  	catch(Exception e){}
+  	try{
+  	    orderItemPstmt.close();
+  	}
+  	catch(Exception e){}
+  	try{
+  	    con.close();
+  	}
+  	catch(Exception e){}
     }
   }
 
@@ -121,5 +120,28 @@ public class OrderBean  {
         orderItemPstmt.setInt(3, bb.getQuantity());  
         orderItemPstmt.execute();
       }
+      deleteOrderedItems();
+  }
+
+  /**
+  * Deletes the ordered items from the database
+  */
+  private void deleteOrderedItems() throws Exception{
+    String sql="UPDATE COMPONENTS ";
+    sql+="INNER JOIN PRODUCTS_COMPONENTS ON ";
+    sql+="COMPONENTS.COMPONENT_ID = PRODUCTS_COMPONENTS.COMPONENT_ID ";
+    sql+="SET QTY = QTY - ? ";
+    sql+="WHERE PRODUCT_ID = ?";
+
+    Iterator iter=((Collection)sb.getCart()).iterator();
+    ProductBean bb=null;
+    deleteItemPstmt=con.prepareStatement(sql);
+
+    while(iter.hasNext()){  
+      bb = (ProductBean)iter.next();
+      deleteItemPstmt.setInt(1, bb.getQuantity()); 
+      deleteItemPstmt.setInt(2, bb.getId());
+      deleteItemPstmt.executeUpdate();
+    }
   }
 }
