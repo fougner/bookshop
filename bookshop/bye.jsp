@@ -4,12 +4,14 @@
 <%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@taglib prefix="webstore" uri="/bookshop"%>
 
-<html>
-<head><title>BookShop::Bye</title></head>
-<body>
+<%@include file='header.html'%>
+
+<div class="container">
+
 	<h1>Good bye</h1>
-  You have logged out from the shop.<br /><br />
-  <a href="shop?action=show">Buy more books</a>
-  
-</body>
-</html>
+	<p>You have logged out from the shop.</p>
+
+	<p><a href="shop?action=show">Buy more books</a></p>
+	
+</div> <!-- /container -->
+<%@include file='footer.html'%>
