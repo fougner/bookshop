@@ -10,6 +10,9 @@ public class ComponentListBean {
     
     private Collection componentList;
     private String url;
+    Connection conn =null;
+    Statement stmt = null;
+    ResultSet rs = null;
 
     public ComponentListBean() throws Exception{
     }
@@ -18,7 +21,14 @@ public class ComponentListBean {
         url=_url;
         componentList = new ArrayList();
 
-        this.update();
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            conn=DriverManager.getConnection(url);
+
+        }
+        catch(SQLException sqle){
+            throw new Exception(sqle);
+        }
     }
 
     /*
@@ -27,15 +37,7 @@ public class ComponentListBean {
     */
     public void update() throws Exception{
 
-        Connection conn =null;
-        Statement stmt = null;
-        ResultSet rs = null;
-
         this.componentList.clear();
-
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            conn=DriverManager.getConnection(url);
 
             stmt = conn.createStatement();
 
@@ -55,26 +57,6 @@ public class ComponentListBean {
                 componentList.add(pb);
                 
             }
-        
-        }
-        catch(SQLException sqle){
-            throw new Exception(sqle);
-        }
-    
-        finally{
-        try{
-              rs.close();
-            }
-            catch(Exception e) {}
-            try{
-              stmt.close();
-            }
-        catch(Exception e) {}
-            try {
-              conn.close();
-            }
-            catch(Exception e){}
-        }
     }
     
     java.util.Collection getComponentList() {
@@ -108,6 +90,20 @@ public class ComponentListBean {
 	    }
 	}
 	return null;
+    }
+
+    public void increaseQuantity(int id, int qty) throws Exception{
+
+        try {
+        PreparedStatement sta = conn.prepareStatement(
+            "UPDATE COMPONENTS SET qty = qty + ? WHERE component_id = ?");
+        sta.setInt(1,qty);
+        sta.setInt(2,id);
+        sta.executeUpdate();
+        }
+        catch(SQLException sqle){
+            throw new Exception("SQLException: " + sqle);
+        }
     }
 
     public static void main(String[] args){

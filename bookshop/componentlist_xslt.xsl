@@ -47,10 +47,10 @@
     <xsl:element name="input"> <!--A ordinary input in XSLT-->
       <xsl:attribute name="type">hidden</xsl:attribute>
       <xsl:attribute name="value"><xsl:value-of select="id"/></xsl:attribute>
-      <xsl:attribute name="name">bookid</xsl:attribute>
+      <xsl:attribute name="name">componentid</xsl:attribute>
     </xsl:element>
     
-    <input type="hidden" name="action" value="add"/>
+    <input type="hidden" name="action" value="buycomponent"/>
    </form>
   </xsl:template>
   

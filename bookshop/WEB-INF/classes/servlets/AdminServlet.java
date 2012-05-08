@@ -11,6 +11,10 @@ import beans.*;
  */
 public class AdminServlet extends HttpServlet {
 
+    private HttpServletRequest request;
+    private HttpServletResponse response;
+    private HttpSession sess;
+    private RequestDispatcher rd;
     private ProductListBean productList = null;
     private ComponentListBean componentList;
     private String jdbcURL;
@@ -21,7 +25,6 @@ public class AdminServlet extends HttpServlet {
         jdbcURL = config.getInitParameter("JDBC_URL");
 
         try{
-            //productList = new ProductListBean(jdbcURL);
             componentList = new ComponentListBean(jdbcURL);
         }
         catch(Exception e){
@@ -36,27 +39,49 @@ public class AdminServlet extends HttpServlet {
         
     }
     
-    protected void processRequest(HttpServletRequest request, 
-                                  HttpServletResponse response)
+    protected void processRequest()
     throws ServletException, java.io.IOException {
 
-        HttpSession sess = request.getSession();
-        RequestDispatcher rd = null;
+        sess = request.getSession();
+        rd = null;
 		sess.setAttribute("currentUser", request.getRemoteUser());
         sess.setAttribute("jdbcURL",jdbcURL);
 
         try {
-	//if(request.getParameter("action") == null || 
-    //       request.getParameter("action").equals("show")){
-            componentList.update();
-            rd = request.getRequestDispatcher("/admin.jsp");
-            rd.forward(request,response);
+
+    	if(request.getParameter("action") == null || 
+               request.getParameter("action").equals("show")){
+            
+                componentList.update();
+                rd = request.getRequestDispatcher("/admin.jsp");
+                rd.forward(request,response);
+    	} else if(request.getParameter("action").equals("buycomponent")) {
+            
+                this.buyComponent();
+                showAdmin();
+        }
+
+
         } catch(Exception e){
             throw new ServletException("Error", e);
         }
-	//}
     }
 
+    protected void buyComponent() throws Exception{
+        
+        int id = Integer.parseInt(request.getParameter("componentid"));
+        int qty = Integer.parseInt(request.getParameter("quantity"));
+
+        componentList.increaseQuantity(id,qty);
+        componentList.update();
+    }
+
+
+    protected void showAdmin() throws Exception{
+            componentList.update();
+            rd = request.getRequestDispatcher("/admin.jsp");
+            rd.forward(request,response);
+    }
 
     /** Handles the HTTP <code>GET</code> method.
      * @param request servlet request
@@ -65,7 +90,9 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, 
                          HttpServletResponse response)
 	throws ServletException, java.io.IOException {
-        processRequest(request, response);
+        this.request = request;
+        this.response = response;
+        processRequest();
     }
     
     /** Handles the HTTP <code>POST</code> method.
@@ -75,7 +102,9 @@ public class AdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, 
                           HttpServletResponse response)
 	throws ServletException, java.io.IOException {
-        processRequest(request, response);
+        this.request = request;
+        this.response = response;
+        processRequest();
     }
     
     /** Returns a short description of the servlet.
