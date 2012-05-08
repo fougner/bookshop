@@ -9,7 +9,11 @@
 <div class="container">
 	<div class="row">
 
-    	<h1>Components</h1>
+	<h1>Admin area</h1>
+	<h2>Feel free to add components to stock!</h2>
+
+
+    	<h3>Components</h3>
 
 	<jsp:useBean id="componentList" class="beans.ComponentListBean" scope="application">
     	Error, the bean should have been created in the servlet!

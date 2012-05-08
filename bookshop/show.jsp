@@ -36,18 +36,5 @@
 </x:transform>
 </div>
 
-<c:if test="${sessionScope.currentUser != null}">
-<div class="row">
-  <form action=shop?action=profile method=post>
-    <input type="submit" value="Update Profile">
-  </form>
-
-  <form action=shop?action=logout method=post>
-    <input type="submit" value="Logout">
-  </form>
-</div>
-
-</c:if>
-
 </div> <!-- /container -->
 <%@include file='footer.html'%>

@@ -16,16 +16,11 @@
   <xsl:template match="shoppingcart">
   <br /> <br />
   <table class="table span6">
-    <tr>
-    <td>
-        <strong>Shoppingcart</strong>
-    </td>
-    <tr>
-      <td>Title</td>
-      <td>Quantity</td>
-      <td colspan="2">Remove</td>
-    </tr>
-    </tr>
+    <thead>
+      <tr>
+        <th>Product</th><th>Quantity</th><th>Remove</th>
+      </tr>
+    </thead>
         <xsl:apply-templates/>
    </table>
   </xsl:template>
@@ -48,7 +43,7 @@
             </xsl:element>        
         </td>
         <td>
-            <input type="submit" value="Remove"/>
+            <input class="btn" type="submit" value="Remove"/>
         </td>
     
       <xsl:element name="input"> <!--A ordinary input in XSLT-->

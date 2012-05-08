@@ -1,31 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- Example:
-<book>
-  <id>1</id>   
-  <title>Javaprogramming</title>
-  <authorname>Fredrik</authorname>
-  <authorsurname>Alund</authorsurname> 
-  <price>23</price>
-  <pages>234</pages>
-  <description>Bla bla bla</description>
-</book>
--->
+
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="html"/>
 
   <xsl:template match="productlist">
-  <table class="table span6">
-    <tr>
-    <td>
-        <strong>Product</strong>
-    </td>
-    <td>
-        <strong>Price</strong>
-    </td>
-    <td>
-        <strong>Stock</strong>
-    </td>
-    </tr>
+  <table class="table span8">
+    <thead>
+      <tr>
+        <th>Product</th><th>Price</th><th>In stock</th><th>Quantity</th><th>Order</th>
+      </tr>
+  </thead>
         <xsl:apply-templates/>
    </table>
   </xsl:template>
@@ -34,7 +18,11 @@
     <form method="post" action="shop">
     <tr>
         <td>
-            <xsl:value-of select="title"/>
+          <xsl:element name="a"> <!-- A link in XSLT -->
+              <xsl:attribute name="href"><xsl:text disable-output-escaping="yes"><![CDATA[shop?action=detail&bookid=]]></xsl:text><xsl:value-of select="id"/></xsl:attribute>
+              <xsl:text><xsl:value-of select="title"/></xsl:text>
+            </xsl:element>
+            
         </td>
         <td>
             <xsl:value-of select="price"/>
@@ -51,11 +39,7 @@
             </xsl:element>        
         </td>
         <td>
-            <input type="submit" value="BUY"/>
-            <xsl:element name="a"> <!-- A link in XSLT -->
-              <xsl:attribute name="href"><xsl:text disable-output-escaping="yes"><![CDATA[shop?action=detail&bookid=]]></xsl:text><xsl:value-of select="id"/></xsl:attribute>
-              <xsl:text>Detail</xsl:text>
-            </xsl:element>
+            <input class="btn" type="submit" value="Add to cart"/>
         </td>
     </tr>
     
