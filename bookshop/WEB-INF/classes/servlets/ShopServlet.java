@@ -67,6 +67,12 @@ public class ShopServlet extends HttpServlet {
 	if(request.getParameter("action") == null || 
            request.getParameter("action").equals("show")){
 	    
+	    try{
+		    productList.update();
+		}
+		catch(Exception e){
+		    throw new ServletException("Error updating product list", e);
+		}
             rd = request.getRequestDispatcher(showPage); 
             rd.forward(request,response);
 	}
