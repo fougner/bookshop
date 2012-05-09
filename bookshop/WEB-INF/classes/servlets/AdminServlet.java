@@ -15,7 +15,7 @@ public class AdminServlet extends HttpServlet {
     private HttpServletResponse response;
     private HttpSession sess;
     private RequestDispatcher rd;
-    private ProductListBean productList = null;
+    private ProductListBean productList;
     private ComponentListBean componentList;
     private String jdbcURL;
 
@@ -26,6 +26,7 @@ public class AdminServlet extends HttpServlet {
 
         try{
             componentList = new ComponentListBean(jdbcURL);
+            productList = new ProductListBean(jdbcURL);
         }
         catch(Exception e){
             throw new ServletException(e);
@@ -33,6 +34,7 @@ public class AdminServlet extends HttpServlet {
 
 		ServletContext sc = getServletContext();
 		sc.setAttribute("componentList",componentList);
+        sc.setAttribute("productList",productList);
      }
 
     public void destroy() {
@@ -86,6 +88,7 @@ public class AdminServlet extends HttpServlet {
     }
 
     protected void showAdmin() throws Exception{
+            productList.update();
             componentList.update();
             rd = request.getRequestDispatcher("/admin.jsp");
             rd.forward(request,response);

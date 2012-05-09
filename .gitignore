@@ -3,6 +3,7 @@
 
 # Temporary files
 *~
+*.sublime-workspace
 
 # Package Files #
 *.jar

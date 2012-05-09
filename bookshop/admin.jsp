@@ -19,6 +19,10 @@
     	Error, the bean should have been created in the servlet!
 	</jsp:useBean>
 
+	<jsp:useBean id="productList" class="beans.ProductListBean" scope="application">
+    	Error, the bean should have been created in the servlet!
+	</jsp:useBean>
+
 
 <c:set var="componentlist_xslt">
    <c:import url="componentlist_xslt.xsl"/>
@@ -28,6 +32,18 @@
     <jsp:getProperty name="componentList" property="xml"/>
 </x:transform>
 	</div>
+
+
+<div class="row">
+
+	<c:set var="productlist_xslt">
+	   <c:import url="productlist_xslt.xsl"/>
+	</c:set> 
+
+	<x:transform xslt="${productlist_xslt}">
+	    <jsp:getProperty name="productList" property="xml"/>
+	</x:transform>
+</div>
 
 	<div class="row">
 		<h3>Add product</h3>

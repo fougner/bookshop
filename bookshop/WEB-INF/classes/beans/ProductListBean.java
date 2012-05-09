@@ -42,8 +42,8 @@ public class ProductListBean {
             stmt = conn.createStatement();
 
             String sql= "SELECT p1.* , MIN( p3.QTY ) AS QTY FROM PRODUCTS AS p1";
-            sql += " INNER JOIN PRODUCTS_COMPONENTS AS p2 ON p1.product_id = p2.product_id";
-            sql += " INNER JOIN COMPONENTS AS p3 ON p2.component_id = p3.component_id";
+            sql += " LEFT JOIN PRODUCTS_COMPONENTS AS p2 ON p1.product_id = p2.product_id";
+            sql += " LEFT JOIN COMPONENTS AS p3 ON p2.component_id = p3.component_id";
             sql += " GROUP BY p1.PRODUCT_ID";
 
             rs= stmt.executeQuery(sql);
