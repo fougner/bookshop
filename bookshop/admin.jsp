@@ -27,8 +27,20 @@
 <x:transform xslt="${componentlist_xslt}">
     <jsp:getProperty name="componentList" property="xml"/>
 </x:transform>
+	</div>
 
-
+	<div class="row">
+		<h3>Add product</h3>
+		<form action="admin?action=addproduct" method="post" class="well">
+  			<label>Title</label>
+  			<input type="text" class="span3" name="title">
+  			<label>Description</label>
+  			<input type="text" class="span3" name="description">
+  			<label>Price</label>
+  			<input type="text" class="span3" name="price">
+  			<br />
+			<button type="submit" class="btn">Add</button>
+		</form>
 	</div>
 
 </div> <!-- /container -->

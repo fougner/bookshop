@@ -1,5 +1,7 @@
 package beans;
 
+import java.sql.*;
+
 /**
  *
  * @author Alexander Fougner
@@ -11,8 +13,25 @@ public class ProductBean {
     private int price;
     private String description;
     private int qty;
+
+    private String url;
+    Connection conn =null;
+    Statement stmt = null;
+    ResultSet rs = null;
     
     public ProductBean() {
+    }
+
+    public ProductBean(String _url) throws Exception{
+      this.url = _url;
+      try{
+            Class.forName("com.mysql.jdbc.Driver");
+            conn=DriverManager.getConnection(url);
+
+        }
+        catch(SQLException sqle){
+            throw new Exception(sqle);
+        }
     }
     
     public int getPrice() {
@@ -63,6 +82,21 @@ public class ProductBean {
       pb.description = this.description;
       pb.qty = this.qty;
       return pb;
+    }
+
+    public void saveProduct() throws Exception{
+      try {
+        PreparedStatement sta = conn.prepareStatement(
+            "INSERT INTO PRODUCTS (title, description, price) VALUES(?,?,?)");
+        sta.setString(1,title);
+        sta.setString(2,description);
+        sta.setInt(3,price);
+        sta.executeUpdate();
+        }
+        catch(SQLException sqle){
+            throw new Exception("SQLException: " + sqle);
+        }
+
     }
 
     public String getXml() {

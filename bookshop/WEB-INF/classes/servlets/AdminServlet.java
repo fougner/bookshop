@@ -49,33 +49,41 @@ public class AdminServlet extends HttpServlet {
 
         try {
 
-    	if(request.getParameter("action") == null || 
-               request.getParameter("action").equals("show")){
-            
-                componentList.update();
-                rd = request.getRequestDispatcher("/admin.jsp");
-                rd.forward(request,response);
-    	} else if(request.getParameter("action").equals("buycomponent")) {
-            
-                this.buyComponent();
+        	if(request.getParameter("action") == null || 
+                   request.getParameter("action").equals("show")){
+                    showAdmin();
+
+        	} else if(request.getParameter("action").equals("buycomponent")) {
+                
+                    this.buyComponent();
+                    showAdmin();
+            } else if(request.getParameter("action").equals("addproduct")) {
+
+                this.addProduct();
                 showAdmin();
-        }
 
-
-        } catch(Exception e){
+            }
+        }catch(Exception e){
             throw new ServletException("Error", e);
         }
     }
 
-    protected void buyComponent() throws Exception{
-        
-        int id = Integer.parseInt(request.getParameter("componentid"));
-        int qty = Integer.parseInt(request.getParameter("quantity"));
+    protected void addProduct() throws Exception{
 
-        componentList.increaseQuantity(id,qty);
-        componentList.update();
+        ProductBean pb = new ProductBean(jdbcURL);
+        pb.setTitle(request.getParameter("title"));
+        pb.setDescription(request.getParameter("description"));
+        pb.setPrice(Integer.parseInt(request.getParameter("price")));
+        pb.saveProduct();
     }
 
+    protected void buyComponent() throws Exception{
+        
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+        int price = Integer.parseInt(request.getParameter("price"));
+
+    }
 
     protected void showAdmin() throws Exception{
             componentList.update();
