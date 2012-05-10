@@ -39,7 +39,7 @@
             </xsl:element>        
         </td>
         <td>
-            <input class="btn" type="submit" value="Add to cart"/>
+            <input class="btn btn-success" type="submit" value="Add to cart"/>
         </td>
     </tr>
     

@@ -43,7 +43,7 @@
             </xsl:element>        
         </td>
         <td>
-            <input class="btn" type="submit" value="Remove"/>
+            <input class="btn btn-danger" type="submit" value="Remove"/>
         </td>
     
       <xsl:element name="input"> <!--A ordinary input in XSLT-->

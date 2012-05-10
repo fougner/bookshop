@@ -14,64 +14,51 @@
   <xsl:output method="html"/>
 
   <xsl:template match="checkout">
-    <html>
-    <head><title>BookShop::Checkout</title></head>
-    <body>
-  <table border="0" cellspacing="0">
-    <tr>
-    <td colspan="4">
-        <strong>Shoppingcart</strong>
-    </td>
-    <tr>
-      <td>Title</td>
-      <td>Quantity</td>
-      <td colspan="2">Remove</td>
-    </tr>
-    </tr>
+<div class="row">
+  <table class="table span6">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+      <tbody>
         <xsl:apply-templates select="shoppingcart/order"/>
+      </tbody>
    </table>
-    <table>
-      <form action="shop" method="post">
-        <input type="hidden" name="action" value="save" />
-        <tr>
-          <td>Name:</td>
-          <td><input>
+</div>
+<div class="row span6">
+  <form action="shop" method="post">
+      <input type="hidden" name="action" value="save" />
+      <label>Name</label>
+          <input>
               <xsl:attribute name="type">text</xsl:attribute>
               <xsl:attribute name="name">shipping_name</xsl:attribute>
               <xsl:attribute name="value"><xsl:value-of select="name"/></xsl:attribute>
-          </input></td>
-        </tr>
-       <tr>
-          <td>Address:</td>
-          <td><input>
+          </input>
+        <label>Address</label>
+          <input>
              <xsl:attribute name="type">text</xsl:attribute> 
              <xsl:attribute name="name">shipping_address</xsl:attribute>
              <xsl:attribute name="value"><xsl:value-of select="address"/></xsl:attribute>
-          </input></td>
-        </tr>
-        <tr>
-          <td>Zip code:</td>
-          <td><input>
+          </input>
+        <label>Zip code</label>
+          <input>
               <xsl:attribute name="type">text</xsl:attribute>
               <xsl:attribute name="name">shipping_zipcode</xsl:attribute>
               <xsl:attribute name="value"><xsl:value-of select="zip"/></xsl:attribute>
-          </input></td>
-        </tr>
-        <tr>
-          <td>City:</td>
-          <td><input>
+          </input>
+        <label>City</label>
+          <input>
              <xsl:attribute name="type">text</xsl:attribute>
              <xsl:attribute name="name">shipping_city</xsl:attribute>
              <xsl:attribute name="value"><xsl:value-of select="city"/></xsl:attribute>
-          </input></td>
-        </tr> 
-        <tr>
-        <td colspan="2"><input type="submit" value="Buy" /></td>
-        </tr>
-      </form>
-    </table>
-    </body>
-    </html>
+          </input>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Order</button>
+        </div>
+  </form>
+</div>
   </xsl:template>
   <xsl:template match="shoppingcart/order">
     <tr>
