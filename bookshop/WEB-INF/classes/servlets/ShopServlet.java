@@ -87,23 +87,23 @@ public class ShopServlet extends HttpServlet {
 				
 				bb = productList.getById(id);
                 if(bb==null){
-                    throw new ServletException("The book is not in stock.");  
+                    rd = request.getRequestDispatcher("/nostock.jsp");
+            		rd.forward(request,response);
                 }
                 else if(bb.getQuantity()< shoppingCart.getQuantity(id)+qty ) {
-					throw new ServletException("Not enough items in stock.");
+					rd = request.getRequestDispatcher("/nostock.jsp");
+            		rd.forward(request,response);
                 }
                 else {
                     shoppingCart.addProduct(bb, qty);
+                    rd = request.getRequestDispatcher(showPage);
+            		rd.forward(request,response);
                 }
+            } else {
+            	rd = request.getRequestDispatcher("/ErrorPage.jsp");
+            	rd.forward(request,response);
             }
-            
-	    // back to the showpage
-
-            rd = request.getRequestDispatcher(showPage);
-            rd.forward(request,response);
        }
-
-	// remove a book from the cart
 
 	else if(request.getParameter("action").equals("remove")){
 	    if (request.getParameter("bookid") != null && 
