@@ -48,6 +48,10 @@ public class RelationBean {
         }
     }
     
+    /*
+    *   Add relation between Product with ID @param p
+    *   and Component with ID @param c
+    */
     public void addRelation(int p, int c) throws Exception {
       try {
         PreparedStatement sta = conn.prepareStatement(

@@ -15,6 +15,14 @@
     	Error, the bean should have been created in the servlet!
 	</jsp:useBean>
 
+	<jsp:useBean id="productList" class="beans.ProductListBean" scope="application">
+    	Error, the bean should have been created in the servlet!
+	</jsp:useBean>
+
+	<jsp:useBean id="componentList" class="beans.ComponentListBean" scope="application">
+    	Error, the bean should have been created in the servlet!
+	</jsp:useBean>
+
 	<c:set var="relationlist_xslt">
 	   <c:import url="relationlist_xslt.xsl"/>
 	</c:set> 
@@ -23,15 +31,28 @@
 	    <jsp:getProperty name="relationList" property="xml"/>
 	</x:transform>
 
+	<c:set var="relationform_xslt">
+	   <c:import url="relationform_xslt.xsl"/>
+	</c:set> 
+
 		<h3>Add relation</h3>
+
 		<form action="admin?action=addrelation" method="post" class="well">
-  			<label>Product</label>
-  			<input type="text" class="span3" name="title">
-  			<label>Component</label>
-  			<input type="text" class="span3" name="description">
-  			<br />
-			<button type="submit" class="btn">Add</button>
-		</form>
+        <label>Product</label>
+        <select name="product">
+        	<x:transform xslt="${relationform_xslt}">
+	    		<jsp:getProperty name="productList" property="xml"/>
+			</x:transform>
+        </select>
+        <label>Component</label>
+        	<select name="component">
+        	<x:transform xslt="${relationform_xslt}">
+	    		<jsp:getProperty name="componentList" property="xml"/>
+			</x:transform>
+			</select>
+        <br />
+      <button type="submit" class="btn">Add</button>
+    	</form>
 	
 	</div>
 

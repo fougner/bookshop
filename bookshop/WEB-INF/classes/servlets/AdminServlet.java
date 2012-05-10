@@ -64,6 +64,9 @@ public class AdminServlet extends HttpServlet {
                     showProducts();
             } else if(request.getParameter("action").equals("relations")) {
                     showRelations();
+            } else if(request.getParameter("action").equals("addrelation")) {
+                    addRelation();
+                    showRelations();
             } else if(request.getParameter("action").equals("removerelation")) {
                     removeRelation();
             } else if(request.getParameter("action").equals("buycomponent")) {
@@ -117,9 +120,20 @@ public class AdminServlet extends HttpServlet {
     }
 
     protected void showRelations() throws Exception{
+            productList.update();
+            componentList.update();
             relationList.update();
             rd = request.getRequestDispatcher("/admin_relations.jsp");
             rd.forward(request,response);
+    }
+
+    protected void addRelation() throws Exception{
+
+        relationList.addRelation(
+            Integer.parseInt(request.getParameter("product")),
+            Integer.parseInt(request.getParameter("component"))
+            );
+        relationList.update();
     }
 
     protected void removeRelation() throws Exception{
