@@ -55,14 +55,20 @@ public class AdminServlet extends HttpServlet {
                    request.getParameter("action").equals("show")){
                     showAdmin();
 
-        	} else if(request.getParameter("action").equals("buycomponent")) {
+        	} else if(request.getParameter("action").equals("components")) {
+                    showComponents();
+            } else if(request.getParameter("action").equals("products")) {
+                    showProducts();
+            } else if(request.getParameter("action").equals("relations")) {
+                    showRelations();
+            } else if(request.getParameter("action").equals("buycomponent")) {
                 
                     this.buyComponent();
-                    showAdmin();
+                    showComponents();
             } else if(request.getParameter("action").equals("addproduct")) {
 
                 this.addProduct();
-                showAdmin();
+                showProducts();
 
             }
         }catch(Exception e){
@@ -87,9 +93,27 @@ public class AdminServlet extends HttpServlet {
     }
 
     protected void showAdmin() throws Exception{
-            productList.update();
-            componentList.update();
             rd = request.getRequestDispatcher("/admin.jsp");
+            rd.forward(request,response);
+    }
+
+    protected void showProducts() throws Exception{
+            productList.update();
+            //componentList.update();
+            rd = request.getRequestDispatcher("/admin_products.jsp");
+            rd.forward(request,response);
+    }
+
+    protected void showComponents() throws Exception{
+            //productList.update();
+            componentList.update();
+            rd = request.getRequestDispatcher("/admin_components.jsp");
+            rd.forward(request,response);
+    }
+
+    protected void showRelations() throws Exception{
+            
+            rd = request.getRequestDispatcher("/admin_relations.jsp");
             rd.forward(request,response);
     }
 
