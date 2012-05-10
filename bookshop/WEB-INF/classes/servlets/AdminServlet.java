@@ -17,6 +17,7 @@ public class AdminServlet extends HttpServlet {
     private RequestDispatcher rd;
     private ProductListBean productList;
     private ComponentListBean componentList;
+    private RelationBean relationList;
     private String jdbcURL;
 
     public void init(ServletConfig config) throws ServletException {
@@ -27,6 +28,7 @@ public class AdminServlet extends HttpServlet {
         try{
             componentList = new ComponentListBean(jdbcURL);
             productList = new ProductListBean(jdbcURL);
+            relationList = new RelationBean(jdbcURL);
         }
         catch(Exception e){
             throw new ServletException(e);
@@ -35,6 +37,7 @@ public class AdminServlet extends HttpServlet {
 		ServletContext sc = getServletContext();
 		sc.setAttribute("componentList",componentList);
         sc.setAttribute("productList",productList);
+        sc.setAttribute("relationList",relationList);
      }
 
     public void destroy() {
@@ -72,7 +75,7 @@ public class AdminServlet extends HttpServlet {
 
             }
         }catch(Exception e){
-            throw new ServletException("Error", e);
+            throw new ServletException(e);
         }
     }
 
@@ -112,7 +115,7 @@ public class AdminServlet extends HttpServlet {
     }
 
     protected void showRelations() throws Exception{
-            
+            relationList.update();
             rd = request.getRequestDispatcher("/admin_relations.jsp");
             rd.forward(request,response);
     }
