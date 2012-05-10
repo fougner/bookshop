@@ -81,10 +81,9 @@ public class AdminServlet extends HttpServlet {
 
     protected void buyComponent() throws Exception{
         
-        String title = request.getParameter("title");
-        String description = request.getParameter("description");
-        int price = Integer.parseInt(request.getParameter("price"));
-
+        int cid = Integer.parseInt(request.getParameter("componentid"));
+        int qty = Integer.parseInt(request.getParameter("quantity"));
+        componentList.increaseQuantity(cid, qty);
     }
 
     protected void showAdmin() throws Exception{
