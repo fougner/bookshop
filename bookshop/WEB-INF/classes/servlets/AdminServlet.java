@@ -64,6 +64,8 @@ public class AdminServlet extends HttpServlet {
                     showProducts();
             } else if(request.getParameter("action").equals("relations")) {
                     showRelations();
+            } else if(request.getParameter("action").equals("removerelation")) {
+                    removeRelation();
             } else if(request.getParameter("action").equals("buycomponent")) {
                 
                     this.buyComponent();
@@ -115,6 +117,13 @@ public class AdminServlet extends HttpServlet {
     }
 
     protected void showRelations() throws Exception{
+            relationList.update();
+            rd = request.getRequestDispatcher("/admin_relations.jsp");
+            rd.forward(request,response);
+    }
+
+    protected void removeRelation() throws Exception{
+            relationList.remove(Integer.parseInt(request.getParameter("id")));
             relationList.update();
             rd = request.getRequestDispatcher("/admin_relations.jsp");
             rd.forward(request,response);

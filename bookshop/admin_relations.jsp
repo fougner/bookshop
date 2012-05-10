@@ -15,11 +15,11 @@
     	Error, the bean should have been created in the servlet!
 	</jsp:useBean>
 
-	<c:set var="relations_xslt">
-	   <c:import url="relations_xslt.xsl"/>
+	<c:set var="relationlist_xslt">
+	   <c:import url="relationlist_xslt.xsl"/>
 	</c:set> 
 
-	<x:transform xslt="${relations_xslt}">
+	<x:transform xslt="${relationlist_xslt}">
 	    <jsp:getProperty name="relationList" property="xml"/>
 	</x:transform>
 

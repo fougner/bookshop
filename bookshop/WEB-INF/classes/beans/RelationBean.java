@@ -48,8 +48,32 @@ public class RelationBean {
         }
     }
     
-    public void addRelation(int p, int c) {
+    public void addRelation(int p, int c) throws Exception {
+      try {
+        PreparedStatement sta = conn.prepareStatement(
+            "INSERT INTO PRODUCTS_COMPONENTS (product_id, component_id) VALUES(?,?)");
+        sta.setInt(1,p);
+        sta.setInt(2,c);
+        sta.executeUpdate();
+        }
+        catch(SQLException sqle){
+            throw new Exception("SQLException: " + sqle);
+        }
       
+    }
+
+    /*
+    *   Delete relation with ID @param id
+    */
+    public void remove(int id) throws Exception {
+      try {
+        PreparedStatement sta = conn.prepareStatement("DELETE FROM PRODUCTS_COMPONENTS WHERE ID = ?");
+        sta.setInt(1,id);
+        sta.executeUpdate();
+        }
+        catch(SQLException sqle){
+            throw new Exception("SQLException: " + sqle);
+        }
     }
 
     public void update() throws Exception {
@@ -79,22 +103,6 @@ public class RelationBean {
         }
     }
 
-/*
-    public void saveProduct() throws Exception{
-      try {
-        PreparedStatement sta = conn.prepareStatement(
-            "INSERT INTO PRODUCTS (title, description, price) VALUES(?,?,?)");
-        sta.setString(1,title);
-        sta.setString(2,description);
-        sta.setInt(3,price);
-        sta.executeUpdate();
-        }
-        catch(SQLException sqle){
-            throw new Exception("SQLException: " + sqle);
-        }
-
-    }
-*/
     public String getXml() {
 
       StringBuffer xmlOut = new StringBuffer();
