@@ -4,7 +4,9 @@
 <%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@taglib prefix="bookshop" uri="/bookshop"%>
 
- <%@include file='header.html'%>
+<jsp:include page='header.jsp'>
+<jsp:param name="page" value="index" />
+</jsp:include>
 
     <div class="container">
     <div class="hero-unit">
